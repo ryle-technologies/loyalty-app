@@ -57,7 +57,7 @@ Real, deployable merchant landing for the **pre-launch lead campaign**: café ow
 
 Stack: Next.js 16 (App Router, TypeScript), Tailwind 4, shadcn/ui primitives, Zod. Static landing (prerendered) + two Route Handlers. Mobile-first, `lang="es-UY"`, 48 px touch targets, visible labels, error summary with focus management, `prefers-reduced-motion` respected.
 
-Visual design (identity still TBD, OQ-S13): warm «café» palette (paper, espresso, crema, terracotta) defined as tokens in `web/src/app/globals.css`; Fraunces (display serif) + Geist (body) via `next/font`; the offer rendered as a perforated «ticket»; the hero placeholder drawn as a phone frame with an empty card area (still clearly labelled as a placeholder); progressive scroll reveals (content is visible without JS and under reduced motion); generated favicon (`app/icon.tsx`) and Open Graph image (`app/opengraph-image.tsx`) for WhatsApp/Instagram link previews.
+Visual design (identity still TBD, OQ-S13): warm «café» palette (paper, espresso, crema, terracotta) defined as tokens in `web/src/app/globals.css`; Fraunces (display serif) + Geist (body) via `next/font`; the offer rendered as a perforated «ticket»; the hero shows an interim PNG of an iPhone with a fictional café Wallet pass (still labelled as a placeholder, U9); progressive scroll reveals (content is visible without JS and under reduced motion); generated favicon (`app/icon.tsx`) and Open Graph image (`app/opengraph-image.tsx`) for WhatsApp/Instagram link previews.
 
 ### What is in it
 
@@ -168,5 +168,5 @@ Kept unchanged on purpose: offer line («Registrate ahora y pagá 199 UYU…»),
 - [ ] **Storage on Vercel**: connect Upstash Redis (or set the webhook) and set `ADMIN_EXPORT_TOKEN`.
 - [ ] **Domain** (B6) + `NEXT_PUBLIC_SITE_URL`.
 - [ ] Sign-off on the flagged copy changes (Lucía / Martin).
-- [ ] Hero image / animation (U9) — placeholder stays visible until designed.
+- [ ] Hero image / animation (U9) — an interim PNG placeholder is in place; final art and the stamp animation are still to be designed.
 - [ ] Optional: internal alert channel per lead (P13) via `LEADS_WEBHOOK_URL`; analytics (visits, registrations, WhatsApp clicks — EXPERIENCE §6) not included.

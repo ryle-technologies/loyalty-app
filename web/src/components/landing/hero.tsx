@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ImageIcon } from "lucide-react";
 import { cta, hero } from "@/content/landing";
 import { Container, OfferTicket, RegisterLink, StampMark } from "./primitives";
 
@@ -45,8 +45,10 @@ export function Hero() {
 }
 
 /**
- * Placeholder visible y deliberado (DECISIONS C4, copy v6 §2): un celular con la
- * zona de la tarjeta vacía. La imagen y la animación de sellos se diseñan después.
+ * Placeholder visible y deliberado (DECISIONS C4, OPEN-QUESTIONS U9): PNG interino
+ * de un iPhone con la tarjeta de sellos de un café ficticio en Apple Wallet.
+ * La imagen final y la animación de sellos se diseñan después. El texto largo
+ * sigue en `hero.imagePlaceholder`.
  */
 function HeroPlaceholder() {
   return (
@@ -56,28 +58,18 @@ function HeroPlaceholder() {
       <Coin className="-right-2 top-1/3 sm:-right-8" tilt="10deg" delay="-2.5s" size="lg" />
       <Coin className="bottom-16 -left-4 sm:-left-10" tilt="6deg" delay="-4.5s" size="sm" />
 
-      <div
-        role="img"
-        aria-label={`Placeholder. ${hero.imagePlaceholder}`}
-        className="relative mx-auto aspect-[9/17] w-[min(100%,17.5rem)] sm:w-[min(100%,20rem)] rounded-[2.6rem] border-[6px] border-espresso-deep bg-espresso-deep p-2 shadow-lift lg:w-[21rem]"
-      >
-        {/* Notch */}
-        <div aria-hidden className="absolute left-1/2 top-3 h-1.5 w-16 -translate-x-1/2 rounded-full bg-black/50" />
-
-        <div className="flex h-full flex-col rounded-[2rem] bg-background p-5 pt-9">
-          <div aria-hidden className="h-2 w-16 rounded-full bg-foreground/15" />
-          <div aria-hidden className="mt-2 h-2 w-28 rounded-full bg-foreground/10" />
-
-          <div className="mt-6 flex flex-1 flex-col items-center justify-center rounded-[1.4rem] border-2 border-dashed border-input/60 bg-[repeating-linear-gradient(135deg,var(--card)_0_12px,var(--secondary)_12px_24px)] p-5 text-center">
-            <ImageIcon aria-hidden className="size-7 text-muted-foreground" />
-            <span className="ph mt-3 text-[10px] uppercase tracking-[0.2em]">placeholder</span>
-            <p className="mt-3 text-[13px] leading-snug text-muted-foreground">
-              {hero.imagePlaceholder}
-            </p>
-          </div>
-
-          <div aria-hidden className="mt-5 h-11 rounded-full bg-espresso/90" />
-        </div>
+      <div className="relative mx-auto aspect-[9/17] w-[min(100%,17.5rem)] sm:w-[min(100%,20rem)] lg:w-[21rem]">
+        <Image
+          src="/hero/hero-phone.png"
+          alt="Placeholder: ejemplo de tarjeta de sellos en Apple Wallet de un café ficticio"
+          fill
+          priority
+          sizes="(min-width: 1024px) 21rem, (min-width: 640px) min(100vw, 20rem), min(100vw, 17.5rem)"
+          className="object-contain drop-shadow-[0_22px_28px_rgb(62_39_24/0.22)]"
+        />
+        <span className="ph pointer-events-none absolute bottom-3 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.2em]">
+          placeholder
+        </span>
       </div>
     </div>
   );
