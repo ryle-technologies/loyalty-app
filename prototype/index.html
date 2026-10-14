@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{marca}} · Prototipo UX</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#222;background:#f4f4f4}
+a{color:#1a4fd6}
+.ph{background:#fff3b0;border:1px dashed #b38f00;padding:0 4px;font-family:ui-monospace,monospace;font-size:.9em;border-radius:3px}
+.todo{display:block;background:#fff3b0;border-left:4px solid #b38f00;padding:6px 10px;font-size:13px;margin:8px 0;color:#5c4a00}
+#proto{position:sticky;top:0;z-index:50;background:#222;color:#fff;font-size:13px;display:flex;gap:6px;align-items:center;padding:6px 10px;overflow-x:auto;white-space:nowrap}
+#proto b{margin-right:6px;color:#ffd84d}
+#proto button{background:#444;color:#fff;border:0;border-radius:4px;padding:6px 10px;font-size:13px;cursor:pointer}
+#proto button.on{background:#ffd84d;color:#222}
+.view{display:none}.view.on{display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+section{background:#fff;border:1px solid #ccc;margin:16px 0;padding:20px 16px;border-radius:6px}
+.lbl{font:11px ui-monospace,monospace;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;background:#fff;border-bottom:1px solid #ccc}
+.logo{width:36px;height:36px;border:2px dashed #999;display:inline-grid;place-items:center;font-size:10px;color:#999;margin-right:8px;vertical-align:middle}
+h1{font-size:28px;line-height:1.2;margin:.2em 0}h2{font-size:22px;margin:.2em 0 .6em}h3{font-size:17px;margin:.6em 0 .2em}
+.btn{display:inline-block;border:2px solid #222;background:#222;color:#fff;padding:12px 18px;border-radius:6px;font-size:16px;font-weight:600;text-decoration:none;cursor:pointer;min-height:48px;text-align:center}
+.btn.sec{background:#fff;color:#222}.btn.sm{padding:6px 10px;min-height:0;font-size:14px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}.btn.full{width:100%}
+.offer{border:2px solid #222;padding:12px;font-weight:700;margin:12px 0}
+.small{font-size:14px;color:#555}
+.cols{display:grid;gap:16px}
+.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:12px}
+.steps li{border:1px solid #ddd;padding:12px;border-radius:6px}
+.steps li::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#222;color:#fff;font-weight:700;margin-right:8px}
+.box{border:1px solid #ddd;padding:12px;border-radius:6px}
+ul.chk{padding-left:0;list-style:none}ul.chk li{padding:6px 0 6px 28px;position:relative}ul.chk li::before{content:"✕";position:absolute;left:4px;color:#888}
+ul.yes li::before{content:"✓"}
+table.price{border-collapse:collapse;width:100%;max-width:420px}table.price td{border:1px solid #ccc;padding:10px}
+.field{margin:14px 0}.field label{display:block;font-weight:600;margin-bottom:4px}
+.field input[type=text],.field input[type=tel],.field input[type=email]{width:100%;font-size:16px;padding:12px;border:2px solid #888;border-radius:6px}
+.phone{display:flex;gap:6px}.phone input:first-child{width:80px!important;flex:none}
+.help{font-size:14px;color:#555;margin-top:4px}
+.err{color:#b00020;font-size:14px;margin-top:4px;display:none}
+.invalid input{border-color:#b00020!important}.invalid .err{display:block}
+.summary{display:none;border:2px solid #b00020;padding:10px;color:#b00020;border-radius:6px}
+.summary.on{display:block}
+.form{max-width:480px}
+.success{border:2px solid #1a7f37;padding:16px;border-radius:6px;background:#eefbf0}
+details{border-bottom:1px solid #ddd;padding:12px 0}summary{font-weight:600;cursor:pointer;min-height:24px}
+.wa{display:inline-flex;gap:8px;align-items:center}.wa i{font-style:normal;border:2px solid currentColor;border-radius:50%;width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px}
+footer{padding:20px 16px;font-size:14px;color:#555}
+.consent{display:flex;gap:10px;align-items:flex-start;min-height:48px;padding:10px 0;cursor:pointer}
+.consent input{width:24px;height:24px;flex:none;margin:2px 0}
+.sep{border-top:1px solid #ddd;margin:16px 0}
+.phone-frame{max-width:390px;margin:16px auto;background:#fff;border:2px solid #999;border-radius:18px;overflow:hidden;min-height:600px}
+.cafehead{background:#5b3a29;color:#fff;padding:14px 16px;display:flex;align-items:center}
+.cafehead .logo{border-color:#fff;color:#fff}
+.stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:260px;margin:8px 0}
+.stamps span{aspect-ratio:1;border:2px solid #888;border-radius:50%}.stamps span.f{background:#5b3a29;border-color:#5b3a29}
+.big{font-size:32px;font-weight:800}
+.walletbtn{display:flex;align-items:center;justify-content:center;gap:8px;background:#000;color:#fff;border-radius:8px;padding:12px;margin:8px 0;font-weight:600;border:0;width:100%;font-size:16px;cursor:pointer;min-height:48px}
+.pass{background:#5b3a29;color:#fff;border-radius:14px;padding:14px;margin:12px}
+.pass .row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.pass small{opacity:.75;font-size:11px;text-transform:uppercase;display:block}
+.qr{width:130px;height:130px;margin:14px auto 4px;background:repeating-conic-gradient(#000 0 25%,#fff 0 50%) 0 0/16px 16px;border:8px solid #fff}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:12px 18px;border-radius:6px;display:none;z-index:99}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:flex-end;justify-content:center;z-index:98}
+.sheet>div{background:#fff;width:100%;max-width:480px;padding:20px;border-radius:12px 12px 0 0}
+.scanner{height:200px;background:#333;color:#ccc;display:grid;place-items:center;border-radius:8px;text-align:center}
+.tabs{display:flex;border-top:1px solid #ccc}.tabs div{flex:1;text-align:center;padding:12px;font-size:14px}.tabs .on{font-weight:700;border-top:3px solid #222}
+.split{display:grid;gap:16px}
+@media(min-width:800px){
+ h1{font-size:44px}.cols{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr 1fr;align-items:start}
+ section{padding:32px}.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}.imgph{grid-column:1/-1}
+ .steps{grid-template-columns:repeat(3,1fr)}
+}
+.imgph{border:3px dashed #999;background:repeating-linear-gradient(45deg,#fafafa 0 12px,#f0f0f0 12px 24px);min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px;color:#555;margin-top:16px;border-radius:8px}.imgph b{font:700 12px ui-monospace,monospace;background:#fff3b0;padding:2px 6px;margin-bottom:8px;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<nav id="proto" aria-label="Prototipo"><b>Prototipo</b>
+<button data-v="landing" class="on">Landing comercios</button>
+<button data-v="privacy">Política de privacidad</button>
+<button data-v="qr">Cliente: QR → alta</button>
+<button data-v="pass">Cliente: pase Wallet</button>
+<button data-v="panel">Panel barista</button>
+<button data-v="flow" title="Ver pase y panel lado a lado">Pase + panel</button>
+</nav>
+
+<!-- ========== S1 LANDING (copy v6) ========== -->
+<div id="v-landing" class="view on">
+<header class="top"><div><span class="logo">logo</span><strong class="ph">{{marca}}</strong></div>
+<a class="btn sec sm wa walink" target="_blank" rel="noopener"><i>☏</i>Escribinos por WhatsApp</a></header>
+<div class="wrap">
+<section class="hero"><div><div class="lbl">2 · Hero</div>
+<h1>Sumá clientes nuevos. Hacé que los de siempre vuelvan.</h1>
+<p>Ponés un QR en caja y quien entra a tu café se lleva tu tarjeta de sellos en el celular, sin bajar ninguna app. Ve cuánto le falta y tiene un motivo para volver.</p></div>
+<div><div class="offer">Registrate ahora y pagá 199 UYU por mes durante los primeros 6 meses.</div>
+<p class="small">Después, 399 UYU por mes. IVA incluido. Sin permanencia.</p>
+<a href="#registro" class="btn full">Registrar mi café</a><p style="text-align:center"><a href="#como-funciona">Ver cómo funciona</a></p></div>
+<div class="imgph" role="img" aria-label="Placeholder de imagen"><b>PLACEHOLDER</b>Imagen: tarjeta de sellos en el celular con animación (sellos que se van sumando) — a diseñar</div></section>
+
+<section><div class="lbl">3 · Cómo te ayuda a crecer</div><h2>Del primer café al cliente de siempre</h2>
+<div class="cols"><div class="box"><h3>Clientes nuevos</h3>
+<p><strong>Se suman el primer día.</strong> Escanean el QR y ven tu recompensa antes de completar nada.</p>
+<p><strong>Sin vueltas para empezar.</strong> No bajan ninguna app: completan nombre, WhatsApp y email y guardan la tarjeta.</p>
+<p><strong>Se van con tu café en el celular.</strong> La tarjeta lleva el nombre de tu café, al lado de las otras tarjetas que usan.</p></div>
+<div class="box"><h3>Los de siempre</h3>
+<p><strong>Ven cuánto les falta.</strong> El progreso está en la tarjeta, en su Wallet, y se actualiza solo con cada sello.</p>
+<p><strong>Un empujón al final.</strong> Cuando les falta uno, la tarjeta les puede avisar que les falta 1 para la recompensa.</p>
+<p><strong>Nunca empiezan de cero.</strong> Si cambian de celular, recuperan la tarjeta con los mismos sellos.</p></div></div>
+</section>
+
+<section id="como-funciona"><div class="lbl">4 · Cómo funciona</div><h2>Cómo funciona</h2>
+<ol class="steps">
+<li><strong>Elegís tu recompensa y ponés el QR en caja.</strong><br>Entre 3 y 15 sellos y la recompensa que quieras. Te ayudamos a armarlo. Imprimís el QR y lo dejás a la vista, con la recompensa escrita al lado.</li>
+<li><strong>Tu cliente lo escanea y guarda la tarjeta.</strong><br>En Apple Wallet o Google Wallet. Ahí ve sus sellos.</li>
+<li><strong>Tu equipo suma con un toque.</strong><br>Escanean la tarjeta desde el celular o la tablet del local y tocan «Sumar sello». Cuando el cliente completa la tarjeta, canjean la recompensa.</li></ol></section>
+
+<section><div class="lbl">5 · Lo que ganás</div><div class="cols"><div><h2>Más motivos para que te elijan</h2><ul class="chk yes">
+<li><strong>Cada cliente nuevo se va con un motivo para volver.</strong> No hace falta que sea habitué: desde la primera compra puede llevarse su primer sello y saber cuánto le falta.</li>
+<li><strong>Una razón para elegirte a vos y no al de al lado.</strong> Si ya tiene sellos en tu tarjeta, tu café es donde le conviene el próximo.</li>
+<li><strong>Tu recompensa, siempre a la vista.</strong> La tarjeta muestra la recompensa y el progreso cada vez que la abre.</li>
+<li><strong>No frenás la fila.</strong> Sumar es escanear y un toque. Canjear, dos. Si alguien toca dos veces sin querer, no se suman dos sellos.</li>
+<li><strong>No comprás nada.</strong> Funciona en el celular o la tablet que ya tenés en el local.</li></ul></div>
+<div class="box small" style="align-self:start"><h3>Y de paso, te olvidás del cartón</h3><ul class="chk">
+<li>No imprimís ni reponés cartones.</li><li>Sin sellos truchos: los suma solo tu equipo, desde el panel.</li><li>No se pierde ni se moja: está en el celular.</li></ul></div></div></section>
+
+<section><div class="lbl">6 · Antes de que lo preguntes</div><h2>Antes de que lo preguntes</h2><div class="cols">
+<div class="box"><strong>«¿Esto me trae clientes nuevos?»</strong><br>Te lo decimos sin vueltas: no hacemos publicidad por vos. Lo que hace es que cada persona que entra a tu café, aunque sea la primera vez, se vaya con tu tarjeta y un motivo para volver.</div>
+<div class="box"><strong>«Mis clientes no se van a bajar una app.»</strong><br>No bajan nada. La tarjeta va en Apple Wallet (iPhone) o Google Wallet (Android).</div>
+<div class="box"><strong>«Mi equipo no tiene tiempo.»</strong><br>Escanear y un toque. Si el cliente no tiene la tarjeta a mano, lo buscan por nombre o teléfono.</div>
+</div></section>
+
+<section><div class="lbl">7 · Precio</div><h2>Un precio claro, sin sorpresas.</h2>
+<div class="offer">Registrate ahora y pagá 199 UYU por mes durante los primeros 6 meses.</div>
+<table class="price"><tr><td>Primeros 6 meses</td><td><strong>199 UYU por mes</strong></td></tr><tr><td>Desde el mes 7</td><td>399 UYU por mes</td></tr></table>
+<ul><li><strong>IVA incluido.</strong></li><li><strong>Sin permanencia.</strong> Cancelás cuando quieras desde el panel. El servicio sigue hasta el final del mes que ya pagaste y no se cobra nada más.</li><li><strong>Pagás por transferencia bancaria</strong> desde el primer mes. Los 6 meses con descuento corren desde que te registrás.</li><li><strong>Sin costos extra:</strong> la tarjeta se actualiza sola en el Wallet de tus clientes.</li></ul>
+<p class="small"><strong>Incluye:</strong> tu programa de sellos con su QR de caja · la tarjeta en Apple Wallet y Google Wallet · el panel para sumar y canjear · ayuda para arrancar.</p>
+<a href="#registro" class="btn">Registrar mi café</a></section>
+
+<section id="registro"><div class="lbl">8 · Formulario de registro (FR-L02)</div>
+<div class="form" id="mform-wrap"><h2>Sumá tu café</h2><p>Son dos datos. Después te escribimos nosotros.</p>
+<div class="summary" id="m-sum" tabindex="-1">Revisá estos datos para seguir:<ul></ul></div>
+<form id="mform" novalidate>
+<input type="hidden" name="rubro" value="café">
+<div class="field" id="f-biz"><label for="biz">Nombre de tu café (obligatorio)</label><input type="text" id="biz" autocomplete="organization" placeholder="Ej.: Café de la esquina"><div class="err">Escribí el nombre de tu café.</div></div>
+<div class="field" id="f-tel"><label for="tel">Tu número de contacto (obligatorio)</label><div class="phone"><input type="tel" id="telpre" value="+598" aria-label="Prefijo"><input type="tel" id="tel" autocomplete="tel" placeholder="99 123 456"></div><div class="help">Te escribimos a este número por WhatsApp.</div><div class="err">Revisá el número. Tiene que ser un teléfono válido.</div></div>
+<label class="small"><input type="checkbox" id="simnet"> <em>[Prototipo] simular error de red</em></label><br><br>
+<button class="btn full" id="mbtn">Registrar mi café</button>
+<p class="err" id="m-net" style="display:none">No pudimos registrar tu café. Probá de nuevo.</p>
+<p class="small">Usamos estos datos solo para contactarte por tu registro. <a href="#" data-go="privacy">Política de privacidad</a></p>
+<span class="todo">PENDIENTE OQ-S9: copy para registro duplicado no definido.</span>
+</form>
+<div class="box" style="margin-top:12px"><strong>Qué pasa después</strong><ol style="margin:6px 0 0"><li>Alguien del equipo te escribe por WhatsApp.</li><li>Te ayudamos a crear tu programa: cuántos sellos y qué recompensa.</li><li>Ponés el QR en caja y empezás a sumar clientes.</li></ol></div>
+</div></section>
+
+<section><div class="lbl">9 · Bloque WhatsApp (FR-L04)</div><h2>¿Preferís preguntar primero?</h2><p>Escribinos. Te responde una persona.</p>
+<a class="btn wa walink" target="_blank" rel="noopener"><i>☏</i>Escribinos por WhatsApp</a>
+<span class="todo">NÚMERO A DEFINIR (OQ-4) · link: <span class="ph">https://wa.me/598XXXXXXXX</span>. Bloquea publicar.</span></section>
+
+<section><div class="lbl">10 · Preguntas frecuentes</div><h2>Preguntas frecuentes</h2>
+<details><summary>¿Me ayuda a conseguir clientes nuevos?</summary><p>Te ayuda a que no se te escapen. Quien entra a tu café puede sumarse con el QR en caja y se va con tu tarjeta. No hacemos publicidad ni le mandamos mensajes a nadie: el motivo para volver es tu recompensa.</p></details>
+<details><summary>¿Cómo hace que los de siempre vuelvan?</summary><p>Ven en la tarjeta cuántos sellos llevan y cuánto les falta. Cuando les falta uno, la tarjeta les puede avisar (depende de cómo tengan configurado el celular). Y cuando completan, ven que ya pueden canjear.</p></details>
+<details><summary>¿Qué recompensa me conviene?</summary><p>La decidís vos: de 3 a 15 sellos y la recompensa que quieras. Pensala bien, porque por ahora no se puede cambiar después de crear el programa. Cada café tiene un programa.</p></details>
+<details><summary>¿Qué pasa si un cliente no tiene Wallet?</summary><p>Por ahora no puede sumarse: no hay versión en papel ni otra opción. En Android tiene que tener una cuenta de Google iniciada.</p></details>
+<details><summary>¿Cuánto cuesta y cómo pago?</summary><p>199 UYU por mes los primeros 6 meses desde que te registrás, después 399 UYU. IVA incluido. Se paga desde el primer mes, por transferencia bancaria.</p></details>
+<details><summary>¿Tengo que quedarme un tiempo mínimo?</summary><p>No. Cancelás cuando quieras desde el panel. El servicio sigue activo hasta el final del mes que ya pagaste y no se cobra nada más.</p></details>
+<details><summary>¿Qué pasa si un cliente cambia de celular?</summary><p>Pide un código desde la página de tu café, le llega por email y recupera la misma tarjeta con sus sellos.</p></details>
+<details><summary>¿Qué pasa con los datos de mis clientes?</summary><p>Cada cliente acepta participar y, aparte, decide si quiere recibir mensajes en el futuro; ninguna casilla viene marcada. Tu equipo ve solo el nombre y parte del teléfono, nunca el email. Los datos los cuida <span class="ph">{{marca}}</span>. <a href="#" data-go="privacy">Política de privacidad</a></p></details>
+<details><summary>¿Sirve para otro tipo de comercio?</summary><p>Por ahora es solo para cafés.</p></details>
+</section>
+
+<section style="text-align:center"><div class="lbl">11 · CTA final</div><h2>Que el cliente de hoy tenga un motivo para volver mañana.</h2>
+<div class="offer" style="display:inline-block">Registrate ahora y pagá 199 UYU por mes durante los primeros 6 meses.</div><p class="small">IVA incluido. Sin permanencia.</p>
+<a href="#registro" class="btn">Registrar mi café</a><p><a class="walink" target="_blank" rel="noopener">Prefiero escribir por WhatsApp</a></p></section>
+</div>
+<footer class="wrap"><div class="lbl">12 · Footer</div>
+<p><span class="ph">{{marca}}</span> © 2026 · <span class="ph">{{razón social}}</span> · <span class="ph">{{email de contacto}}</span> · <a class="walink" target="_blank" rel="noopener">Escribinos por WhatsApp</a><br>
+<a href="#" data-go="privacy">Política de privacidad</a> · <span class="ph">[Términos de la oferta: PENDIENTE]</span><br>
+Precios en pesos uruguayos, IVA incluido. Sin permanencia.<br>
+Apple Wallet es una marca de Apple Inc. Google Wallet es una marca de Google LLC.</p></footer>
+</div>
+
+<!-- ========== PRIVACY ========== -->
+<div id="v-privacy" class="view"><div class="wrap" style="max-width:720px"><section>
+<p><a href="#" data-go="back">← Volver</a></p>
+<span class="todo">[PENDIENTE] Borrador provisorio. El texto legal final tiene que revisarlo un abogado (Ley 18.331, Uruguay).</span>
+<h1 style="font-size:28px">Política de privacidad de <span class="ph">{{marca}}</span></h1>
+<h3>Qué datos guardamos y para qué</h3><ul>
+<li><strong>Clientes de cada café:</strong> nombre, número de WhatsApp y email. Los usamos para darte la tarjeta de sellos de ese café, sumar y canjear tus sellos, y recuperar tu tarjeta con un código por email.</li>
+<li><strong>Mensajes en el futuro:</strong> solo te escribimos si marcaste esa casilla, que es opcional. Por ahora no mandamos mensajes por WhatsApp.</li>
+<li><strong>Cafés que se registran en la landing:</strong> nombre del comercio y número de contacto, para contactarte y ayudarte a empezar.</li>
+<li><strong>Tus sellos:</strong> guardamos los sellos que sumás y las recompensas que canjeás en cada café. El personal del café ve tu teléfono enmascarado y no ve tu email.</li></ul>
+<h3>Responsable</h3><p><span class="ph">{{marca}}</span>. Para consultar, corregir o borrar tus datos, o para dejar de participar, escribinos a <span class="ph">{{email}}</span>.</p>
+</section></div></div>
+
+<!-- ========== S2 CUSTOMER ========== -->
+<div id="v-qr" class="view"><div class="phone-frame">
+<div class="cafehead"><span class="logo">logo</span><strong>Café Cordón</strong> <span class="small" style="color:#ddd;margin-left:6px">(ejemplo)</span></div>
+<div style="padding:16px" id="c-body">
+<div class="box"><div class="lbl">ProgramSummaryCard</div><p style="margin:0">Juntá <strong>8 sellos</strong> y llevate <strong>un cortado de regalo</strong></p><div class="stamps" id="c-prev"></div><div class="small">0 de 8 sellos</div></div>
+<div class="summary" id="c-sum" tabindex="-1" style="margin-top:12px">Revisá estos datos para seguir:<ul></ul></div>
+<form id="cform" novalidate>
+<div class="field" id="f-cn"><label for="cn">Nombre (obligatorio)</label><input type="text" id="cn" autocomplete="given-name"><div class="err">Escribí tu nombre.</div></div>
+<div class="field" id="f-cw"><label for="cw">WhatsApp (obligatorio)</label><div class="phone"><input type="tel" id="cwpre" value="+598" aria-label="Prefijo"><input type="tel" id="cw" autocomplete="tel" placeholder="99 123 456"></div><div class="help">Por ahora no te vamos a escribir por WhatsApp.</div><div class="err">Revisá el número de WhatsApp.</div></div>
+<div class="field" id="f-ce"><label for="ce">Email (obligatorio)</label><input type="email" id="ce" autocomplete="email" autocapitalize="off" spellcheck="false"><div class="help">Lo usamos para mandarte un código si perdés la tarjeta.</div><div class="err">Revisá el email.</div></div>
+<div class="sep"></div>
+<div id="f-ca"><label class="consent"><input type="checkbox" id="ca"><span>Quiero participar del programa de sellos de Café Cordón y acepto la <a href="#" data-go="privacy">política de privacidad</a>. (obligatoria)</span></label><div class="err">Para sumarte tenés que aceptar participar del programa.</div></div>
+<div class="sep"></div>
+<label class="consent"><input type="checkbox" id="cb"><span>Quiero recibir mensajes de Café Cordón en el futuro. (opcional)</span></label>
+<button class="btn full" id="cbtn" style="margin-top:12px">Sumarme</button>
+<p style="text-align:center"><a href="#" onclick="alert('S5 Recuperar: fuera del alcance de este prototipo');return false">¿Ya tenías la tarjeta? Recuperala</a></p>
+<p class="small">Usamos tus datos solo para tu tarjeta de sellos. Podés darte de baja cuando quieras. Más info en la <a href="#" data-go="privacy">política de privacidad</a>. Responsable: <span class="ph">{{marca}}</span>.</p>
+<span class="todo">PENDIENTE: copy de «WhatsApp ya registrado en este café» (E3) y error de red en el alta.</span>
+</form></div>
+<div style="padding:16px;display:none" id="c-ok">
+<h2>¡Listo, <span id="c-name"></span>! Guardá tu tarjeta en Wallet.</h2>
+<button class="walletbtn" data-wallet="apple"> Agregar a Apple Wallet</button>
+<button class="walletbtn" data-wallet="google">Add to Google Wallet</button>
+<span class="todo">Badges oficiales van acá (no redibujar). Plataforma detectada primero.</span>
+<p>Cuando la guardes, mostrale el QR al barista en cada compra.</p>
+<p class="small"><a href="#" id="nowallet">[Prototipo] ver estado «sin Wallet»</a></p>
+<div id="nowallet-msg" class="box" style="display:none">Para sumarte necesitás Apple Wallet o Google Wallet en tu celular. Por ahora no hay otra forma de tener la tarjeta.</div>
+</div></div></div>
+
+<!-- ========== S3 PASS ========== -->
+<div id="v-pass" class="view"><div class="phone-frame" style="background:#e9e9e9">
+<p class="small" style="padding:8px 16px 0">Mock del pase (Apple storeCard). Es una imagen firmada: sin botones.</p>
+<div id="pass-slot"></div></div></div>
+
+<!-- ========== S4 PANEL ========== -->
+<div id="v-panel" class="view"><div class="phone-frame"><div id="panel-slot"></div></div></div>
+
+<!-- ========== SIDE BY SIDE ========== -->
+<div id="v-flow" class="view"><div class="wrap split" style="padding-top:8px">
+<div class="phone-frame" style="background:#e9e9e9;margin:0 auto"><p class="small" style="padding:8px 16px 0">Pase del cliente</p><div id="pass-slot2"></div></div>
+<div class="phone-frame" style="margin:0 auto"><div id="panel-slot2"></div></div></div></div>
+
+<div class="sheet" id="sheet"><div><h3 id="sheet-t"></h3><button class="btn full" id="sheet-ok"></button><br><br><button class="btn sec full" id="sheet-no">Volver</button></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const WA='https://wa.me/598XXXXXXXX?text='+encodeURIComponent('Hola, tengo un café y quiero saber más sobre la tarjeta de sellos.');
+document.querySelectorAll('.walink').forEach(a=>a.href=WA);
+const $=s=>document.querySelector(s);
+let last='landing';
+function show(v){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));
+ document.querySelectorAll('#proto button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+ if(v!=='privacy')last=v; render(); scrollTo(0,0); history.replaceState(null,'','#'+v)}
+document.querySelectorAll('#proto button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){e.preventDefault();show(g.dataset.go==='back'?last:g.dataset.go)}});
+
+function setErr(id,bad){$('#'+id).classList.toggle('invalid',bad);return bad}
+function summary(el,errs){const ul=el.querySelector('ul');ul.innerHTML=errs.map(([id,t])=>`<li><a href="#" data-f="${id}">${t}</a></li>`).join('');
+ el.classList.toggle('on',errs.length>0);ul.querySelectorAll('a').forEach(a=>a.onclick=ev=>{ev.preventDefault();document.querySelector('#'+a.dataset.f+' input:not([type=hidden]):last-of-type, #'+a.dataset.f+' input').focus()});if(errs.length)el.focus()}
+const telOk=(p,n)=>/^\+\d{1,3}$/.test(p.trim())&&/^\d{7,12}$/.test(n.replace(/[\s-]/g,''));
+
+// merchant form
+const mchecks={'f-biz':()=>$('#biz').value.trim().length>0,'f-tel':()=>telOk($('#telpre').value,$('#tel').value)};
+['biz','tel'].forEach(i=>$('#'+i).addEventListener('blur',()=>{const f=$('#'+i).closest('.field').id;if($('#'+i).value)setErr(f,!mchecks[f]())}));
+$('#mform').onsubmit=e=>{e.preventDefault();$('#m-net').style.display='none';
+ const errs=[];for(const f in mchecks)if(setErr(f,!mchecks[f]()))errs.push([f,$('#'+f+' .err').textContent]);
+ summary($('#m-sum'),errs);if(errs.length)return;
+ const b=$('#mbtn');b.disabled=true;b.textContent='Registrando…';
+ setTimeout(()=>{if($('#simnet').checked){b.disabled=false;b.textContent='Registrar mi café';$('#m-net').style.display='block';return}
+  $('#mform-wrap').innerHTML='<div class="success" tabindex="-1" id="m-ok"><h2>¡Listo! Recibimos tu registro.</h2><p>Alguien del equipo te va a escribir por WhatsApp para ponerte en marcha.</p><p class="small">[Prototipo] Datos enviados: '+JSON.stringify({comercio:$('#biz').value,telefono:$('#telpre').value+$('#tel').value.replace(/\D/g,''),rubro:'café'})+'</p></div>';$('#m-ok').focus()},900)};
+
+// customer form
+const S={name:'Mateo',n:8,count:0,reward:'un cortado de regalo',joined:false,phone:'099123123'};
+const cchecks={'f-cn':()=>$('#cn').value.trim().length>0,'f-cw':()=>telOk($('#cwpre').value,$('#cw').value),'f-ce':()=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('#ce').value.trim()),'f-ca':()=>$('#ca').checked};
+['cn','cw','ce'].forEach(i=>$('#'+i).addEventListener('blur',()=>{const f=$('#'+i).closest('[id^=f-]').id;if($('#'+i).value)setErr(f,!cchecks[f]())}));
+$('#ca').onchange=()=>{if($('#ca').checked)setErr('f-ca',false)};
+$('#cform').onsubmit=e=>{e.preventDefault();const errs=[];for(const f in cchecks)if(setErr(f,!cchecks[f]()))errs.push([f,$('#'+f+' .err').textContent]);
+ summary($('#c-sum'),errs);if(errs.length)return;const b=$('#cbtn');b.disabled=true;b.textContent='Sumando…';
+ setTimeout(()=>{S.name=$('#cn').value.trim();S.phone=$('#cw').value.replace(/\D/g,'');S.count=0;S.joined=true;S.consentB=$('#cb').checked;
+  $('#c-name').textContent=S.name;$('#c-body').style.display='none';$('#c-ok').style.display='block'},700)};
+document.querySelectorAll('[data-wallet]').forEach(b=>b.onclick=()=>{toast('[Prototipo] Hoja nativa de Wallet → «Agregar»');setTimeout(()=>show('pass'),800)});
+$('#nowallet').onclick=e=>{e.preventDefault();$('#nowallet-msg').style.display='block'};
+
+function stampsHTML(c,n){let h='';for(let i=0;i<n;i++)h+=`<span class="${i<c?'f':''}"></span>`;return h}
+function status(){const f=S.n-S.count;return f<=0?`¡Ya podés canjear ${S.reward}!`:f===1?`Te falta 1 para ${S.reward}`:`Te faltan ${f}`}
+function mask(p){return '+598 •• ••• '+(p||'000').slice(-3)}
+function passHTML(){return `<div class="pass"><div class="row"><div><span class="logo" style="border-color:#fff;color:#fff">logo</span><strong>Café Cordón</strong></div><div style="text-align:right"><small>Sellos</small><span class="big" style="font-size:24px">${S.count}/${S.n}</span></div></div>
+<div class="stamps" style="max-width:none;margin:14px 0">${stampsHTML(S.count,S.n).replace(/class="f"/g,'class="f" style="background:#fff;border-color:#fff"').replace(/<span class="">/g,'<span style="border-color:#fff8">')}</div>
+<div class="row"><div><small>Recompensa</small>${S.reward}</div><div style="text-align:right"><small>Estado</small>${status()}</div></div>
+<div class="qr"></div><div style="text-align:center;font-family:monospace;font-size:13px">M-7F3K</div></div>
+<p class="small" style="padding:0 16px">Reverso: 8 sellos = un cortado de regalo · ¿Perdiste la tarjeta? Recuperala · Darme de baja de Café Cordón · Privacidad · Emisor: <span class="ph">{{marca}}</span></p>
+${S.joined?'':'<p class="small" style="padding:0 16px">[Prototipo] Pase de ejemplo (Mateo). Completá el alta para usar tu nombre.</p>'}`}
+function panelHTML(){const can=S.count>=S.n;return `<div style="padding:12px 16px;border-bottom:1px solid #ccc"><strong class="ph">{{marca}}</strong> · Panel · Café Cordón <span class="small">(staff)</span></div>
+<div style="padding:16px"><div class="scanner">[Cámara: escáner]<br>Mostrá el QR de la tarjeta</div>
+<button class="btn sec full" style="margin:8px 0" onclick="toast('Búsqueda: fuera del alcance del prototipo')">Buscar por nombre o teléfono</button>
+<div class="box"><div class="lbl">MemberCard (escaneado)</div><strong>${S.name}</strong> · <span class="small">${mask(S.phone)}</span>
+<div class="big">${S.count} de ${S.n}</div><div class="stamps">${stampsHTML(S.count,S.n)}</div>
+<button class="btn full" id="addbtn">Sumar sello</button>
+<button class="btn sec full" style="margin-top:8px" id="redbtn" ${can?'':'disabled'}>Canjear ${S.reward}</button>
+${can?'':`<div class="small" style="margin-top:4px">Le faltan ${S.n-S.count} para canjear</div>`}
+<label class="small" style="display:block;margin-top:8px"><input type="checkbox" id="offline"> [Prototipo] simular sin conexión</label></div></div>
+<div class="tabs"><div class="on">Escanear</div><div>Programa</div></div>`}
+function render(){['#pass-slot','#pass-slot2'].forEach(s=>$(s).innerHTML=passHTML());['#panel-slot','#panel-slot2'].forEach(s=>$(s).innerHTML=panelHTML());
+ $('#c-prev').innerHTML=stampsHTML(0,S.n);
+ document.querySelectorAll('#addbtn').forEach(b=>b.onclick=()=>{const off=b.closest('.box').querySelector('#offline').checked;b.disabled=true;b.textContent='Sumando…';
+  setTimeout(()=>{if(off){toast('Sin conexión. No se sumó el sello.');render();return}
+   if(S.count<S.n)S.count++; render();toast('Sello sumado · '+S.count+' de '+S.n)},500)});
+ document.querySelectorAll('#redbtn').forEach(b=>b.onclick=()=>sheet(`¿Canjear ${S.reward} para ${S.name}?`,`Canjear ${S.reward}`,()=>{S.count-=S.n;render();toast(`Canje hecho · ${S.count} de ${S.n}`)}))}
+function sheet(t,ok,fn){$('#sheet-t').textContent=t;$('#sheet-ok').textContent=ok;$('#sheet').style.display='flex';$('#sheet-ok').onclick=()=>{$('#sheet').style.display='none';fn()};$('#sheet-no').onclick=()=>$('#sheet').style.display='none'}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(tt);tt=setTimeout(()=>t.style.display='none',5000)}
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&a.getAttribute('href').length>1&&!a.dataset.go){const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}}});
+render();const h=location.hash.slice(1);if(document.getElementById('v-'+h))show(h);
+</script>
+</body></html>
