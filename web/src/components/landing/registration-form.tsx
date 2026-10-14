@@ -191,12 +191,12 @@ export function RegistrationForm() {
         tabIndex={-1}
         role="status"
         aria-live="polite"
-        className="rounded-2xl border border-success/30 bg-success-bg p-6 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+        className="rounded-3xl border border-success/25 bg-success-bg p-7 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
       >
         <div className="flex items-start gap-3">
           <CheckCircle2 aria-hidden className="mt-0.5 size-7 shrink-0 text-success" />
           <div>
-            <h3 className="text-xl font-semibold">{copy.success.title}</h3>
+            <h3 className="font-display text-2xl font-medium">{copy.success.title}</h3>
             <p className="mt-2 text-foreground/85">{copy.success.text}</p>
           </div>
         </div>
@@ -214,7 +214,7 @@ export function RegistrationForm() {
           ref={summaryRef}
           tabIndex={-1}
           role="alert"
-          className="rounded-xl border border-destructive/40 bg-destructive/5 p-4 text-sm outline-none focus-visible:ring-3 focus-visible:ring-destructive/30"
+          className="rounded-2xl border border-destructive/30 bg-destructive/5 p-4 text-sm outline-none focus-visible:ring-3 focus-visible:ring-destructive/30"
         >
           <p className="flex items-center gap-2 font-semibold text-destructive">
             <CircleAlert aria-hidden className="size-4" />
@@ -289,7 +289,7 @@ export function RegistrationForm() {
             onBlur={onBlur("phone")}
             aria-invalid={errors.phone ? true : undefined}
             disabled={busy}
-            className="h-12 w-20 shrink-0 px-3 text-base"
+            className="h-12 w-20 shrink-0 rounded-xl border-input/70 bg-background/60 px-3 text-base hover:border-input focus-visible:bg-card md:text-base"
           />
           <TextInput
             id={id("phoneNational")}
@@ -324,8 +324,7 @@ export function RegistrationForm() {
         />
       </Field>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <Field id={id("email")} label={copy.fields.email.label} error={errors.email}>
+      <Field id={id("email")} label={copy.fields.email.label} error={errors.email}>
           <TextInput
             id={id("email")}
             name="email"
@@ -344,7 +343,7 @@ export function RegistrationForm() {
           />
         </Field>
 
-        <Field id={id("instagram")} label={copy.fields.instagram.label} error={errors.instagram}>
+      <Field id={id("instagram")} label={copy.fields.instagram.label} error={errors.instagram}>
           <TextInput
             id={id("instagram")}
             name="instagram"
@@ -360,7 +359,6 @@ export function RegistrationForm() {
             disabled={busy}
           />
         </Field>
-      </div>
 
       {/* Honeypot: fuera de la vista y del orden de tab. Los bots lo completan. */}
       <div aria-hidden className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
@@ -384,7 +382,7 @@ export function RegistrationForm() {
           size="lg"
           disabled={busy}
           aria-busy={busy || undefined}
-          className="h-12 w-full rounded-xl text-base font-semibold"
+          className="h-13 w-full rounded-full bg-espresso text-base font-semibold shadow-soft transition-all hover:-translate-y-0.5 hover:bg-espresso-deep hover:shadow-lift"
         >
           {busy ? (
             <>
@@ -432,7 +430,7 @@ function Field({
 }) {
   return (
     <div className="space-y-1.5">
-      <Label htmlFor={id} className="text-base font-semibold">
+      <Label htmlFor={id} className="text-[15px] font-semibold">
         {label}
       </Label>
       {children}
@@ -464,7 +462,7 @@ function TextInput({
       id={id}
       aria-invalid={error ? true : undefined}
       aria-describedby={described || undefined}
-      className={`h-12 px-3 text-base md:text-base ${className ?? ""}`}
+      className={`h-12 rounded-xl border-input/70 bg-background/60 px-3.5 text-base shadow-none transition-colors hover:border-input focus-visible:bg-card md:text-base ${className ?? ""}`}
       {...props}
     />
   );

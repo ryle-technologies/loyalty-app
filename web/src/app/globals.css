@@ -8,8 +8,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-geist-mono, ui-monospace, monospace);
+  --font-heading: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -31,6 +32,11 @@
   --color-success-bg: var(--success-bg);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-crema: var(--crema);
+  --color-crema-strong: var(--crema-strong);
+  --color-espresso: var(--espresso);
+  --color-espresso-deep: var(--espresso-deep);
+  --color-terracotta: var(--terracotta);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -48,35 +54,55 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --shadow-soft: 0 1px 2px oklch(0.3 0.03 50 / 6%), 0 12px 32px -12px oklch(0.3 0.03 50 / 18%);
+  --shadow-lift: 0 2px 4px oklch(0.3 0.03 50 / 8%), 0 24px 48px -16px oklch(0.3 0.03 50 / 28%);
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 10s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--tilt, 0deg));
+    }
+    50% {
+      transform: translateY(-10px) rotate(var(--tilt, 0deg));
+    }
+  }
 }
 
 :root {
-  --background: oklch(0.985 0.006 80);
-  --foreground: oklch(0.21 0.02 50);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.02 50);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.02 50);
-  --primary: oklch(0.32 0.05 45);
-  --primary-foreground: oklch(0.985 0.01 80);
-  --secondary: oklch(0.955 0.012 80);
-  --secondary-foreground: oklch(0.25 0.03 50);
-  --muted: oklch(0.955 0.012 80);
-  --muted-foreground: oklch(0.44 0.02 50);
-  --accent: oklch(0.94 0.055 85);
-  --accent-foreground: oklch(0.25 0.04 50);
+  /* Paleta «café»: papel, espresso, crema, un toque de terracota. Identidad final pendiente (OQ-S13). */
+  --background: oklch(0.977 0.009 80);
+  --foreground: oklch(0.22 0.025 45);
+  --card: oklch(0.995 0.004 80);
+  --card-foreground: oklch(0.22 0.025 45);
+  --popover: oklch(0.995 0.004 80);
+  --popover-foreground: oklch(0.22 0.025 45);
+  --primary: oklch(0.29 0.045 45);
+  --primary-foreground: oklch(0.975 0.012 80);
+  --secondary: oklch(0.945 0.016 80);
+  --secondary-foreground: oklch(0.26 0.03 45);
+  --muted: oklch(0.945 0.016 80);
+  --muted-foreground: oklch(0.45 0.025 50);
+  --accent: oklch(0.93 0.06 85);
+  --accent-foreground: oklch(0.3 0.05 50);
+  --crema: oklch(0.955 0.04 85);
+  --crema-strong: oklch(0.86 0.12 82);
+  --espresso: oklch(0.29 0.045 45);
+  --espresso-deep: oklch(0.21 0.035 45);
+  --terracotta: oklch(0.6 0.14 40);
   --destructive: oklch(0.5 0.2 27);
-  --success: oklch(0.42 0.12 150);
-  --success-bg: oklch(0.96 0.03 150);
-  --border: oklch(0.89 0.012 80);
+  --success: oklch(0.42 0.11 150);
+  --success-bg: oklch(0.955 0.03 150);
+  --border: oklch(0.885 0.014 80);
   --input: oklch(0.6 0.02 60);
-  --ring: oklch(0.32 0.05 45);
+  --ring: oklch(0.29 0.045 45);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.75rem;
+  --radius: 0.875rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -97,15 +123,84 @@
   }
   body {
     @apply bg-background text-foreground text-base leading-relaxed;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: var(--crema-strong);
+    color: var(--espresso-deep);
   }
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 30;
+  letter-spacing: -0.015em;
+}
+
+/* Tamaño óptico «display» para titulares grandes: más contraste, más elegante. */
+@utility font-display-hi {
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  letter-spacing: -0.02em;
 }
 
 /* Placeholders pendientes ({{marca}}, número de WhatsApp…): visibles a propósito. */
 .ph {
   @apply rounded-sm border border-dashed border-amber-700/60 bg-amber-100 px-1 font-mono text-[0.9em] text-amber-900;
+}
+
+/* Trama de puntos: recuerda a los sellos de la tarjeta. */
+.stamp-dots {
+  background-image: radial-gradient(circle, currentColor 1.2px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+
+/* Tarjeta «ticket»: muescas a los lados + línea troquelada. */
+.ticket {
+  --notch: 12px;
+  -webkit-mask:
+    radial-gradient(circle at 0 50%, transparent var(--notch), #000 calc(var(--notch) + 0.5px)),
+    radial-gradient(circle at 100% 50%, transparent var(--notch), #000 calc(var(--notch) + 0.5px));
+  -webkit-mask-composite: source-in;
+  mask:
+    radial-gradient(circle at 0 50%, transparent var(--notch), #000 calc(var(--notch) + 0.5px)),
+    radial-gradient(circle at 100% 50%, transparent var(--notch), #000 calc(var(--notch) + 0.5px));
+  mask-composite: intersect;
+}
+.ticket-rule {
+  background-image: repeating-linear-gradient(
+    90deg,
+    currentColor 0 8px,
+    transparent 8px 14px
+  );
+  height: 1px;
+  opacity: 0.35;
+}
+
+/* Aparición al hacer scroll (ver components/landing/reveal.tsx). */
+.reveal {
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.reveal[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
 }
