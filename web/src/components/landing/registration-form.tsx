@@ -13,7 +13,6 @@ type FieldName =
   | "businessName"
   | "contactName"
   | "phone"
-  | "barrio"
   | "email"
   | "instagram";
 
@@ -22,7 +21,6 @@ type Values = {
   contactName: string;
   phonePrefix: string;
   phoneNational: string;
-  barrio: string;
   email: string;
   instagram: string;
   website: string;
@@ -33,7 +31,6 @@ const EMPTY: Values = {
   contactName: "",
   phonePrefix: DEFAULT_PHONE_PREFIX,
   phoneNational: "",
-  barrio: "",
   email: "",
   instagram: "",
   website: "",
@@ -43,7 +40,6 @@ const FIELD_ORDER: FieldName[] = [
   "businessName",
   "contactName",
   "phone",
-  "barrio",
   "email",
   "instagram",
 ];
@@ -59,8 +55,6 @@ function validateField(name: FieldName, v: Values): string | null {
       return v.contactName.trim() ? null : copy.fields.contactName.error;
     case "phone":
       return isValidPhone(v.phonePrefix, v.phoneNational) ? null : copy.fields.phone.error;
-    case "barrio":
-      return v.barrio.trim() ? null : copy.fields.barrio.error;
     case "email":
       return !v.email.trim() || EMAIL_RE.test(v.email.trim()) ? null : copy.fields.email.error;
     case "instagram":
@@ -144,7 +138,6 @@ export function RegistrationForm() {
           contactName: values.contactName,
           phonePrefix: values.phonePrefix,
           phoneNational: values.phoneNational,
-          barrio: values.barrio,
           email: values.email,
           instagram: values.instagram,
           website: values.website,
@@ -307,21 +300,6 @@ export function RegistrationForm() {
             required
           />
         </div>
-      </Field>
-
-      <Field id={id("barrio")} label={copy.fields.barrio.label} error={errors.barrio}>
-        <TextInput
-          id={id("barrio")}
-          name="barrio"
-          autoComplete="address-level3"
-          placeholder={copy.fields.barrio.placeholder}
-          value={values.barrio}
-          onChange={set("barrio")}
-          onBlur={onBlur("barrio")}
-          error={errors.barrio}
-          disabled={busy}
-          required
-        />
       </Field>
 
       <Field id={id("email")} label={copy.fields.email.label} error={errors.email}>

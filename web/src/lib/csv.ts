@@ -21,7 +21,6 @@ export function leadsToCsv(leads: Lead[]): string {
       l.phone,
       l.email,
       l.instagram,
-      l.barrio,
       l.businessType,
       l.utm?.source,
       l.utm?.medium,

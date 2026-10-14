@@ -25,7 +25,6 @@ export const registrationInputSchema = z
     contactName: trimmed(120, form.fields.contactName.error),
     phonePrefix: z.string().trim().max(5),
     phoneNational: z.string().trim().max(20),
-    barrio: trimmed(80, form.fields.barrio.error),
     email: optionalTrimmed(254, form.fields.email.error).pipe(
       z.email(form.fields.email.error).optional(),
     ),
@@ -76,7 +75,6 @@ export interface Lead {
   email?: string;
   /** Usuario de Instagram sin `@`. */
   instagram?: string;
-  barrio: string;
   /** Fijo `café` (PRD FR-L02). */
   businessType: string;
   utm?: { source?: string; medium?: string; campaign?: string };
@@ -90,7 +88,6 @@ export const LEAD_CSV_COLUMNS = [
   "phone",
   "email",
   "instagram",
-  "barrio",
   "businessType",
   "utmSource",
   "utmMedium",
@@ -120,7 +117,6 @@ export function toLead(
     phone,
     email: input.email,
     instagram: input.instagram,
-    barrio: input.barrio,
     businessType,
     utm,
   };

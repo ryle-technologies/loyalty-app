@@ -67,7 +67,7 @@ Visual design (identity still TBD, OQ-S13): warm «café» palette (paper, espre
 | `web/src/content/landing.ts` | All copy (v6) as constants. Every deviation from v6 is marked `// CAMBIO vs v6:` or `// NUEVO` |
 | `web/src/app/page.tsx` + `components/landing/*` | Sections of copy v6: header, hero (with the **visible image placeholder** — animation to be designed later), «Del primer café al cliente de siempre», «Cómo funciona», «Más motivos para que te elijan», «Antes de que lo preguntes», precio, CTA «Sumá tu café» (lleva a `/registro`), bloque WhatsApp, FAQ, CTA final, footer |
 | `web/src/app/registro/page.tsx` | Página dedicada al registro de interés (solo el formulario + «Qué pasa después»). Todos los botones «Anotar mi café» apuntan acá |
-| `web/src/components/landing/registration-form.tsx` | «Registro de interés»: nombre del café, tu nombre, número (prefijo +598 editable, guardado en E.164), barrio, email (opcional), Instagram (opcional). Rubro oculto fijo `café`. Validación al salir del campo y al enviar, resumen de errores con foco, botón «Anotando…», error de red conservando datos, éxito que reemplaza el formulario |
+| `web/src/components/landing/registration-form.tsx` | «Registro de interés»: nombre del café, tu nombre, número (prefijo +598 editable, guardado en E.164), email (opcional), Instagram (opcional). Rubro oculto fijo `café`. Validación al salir del campo y al enviar, resumen de errores con foco, botón «Anotando…», error de red conservando datos, éxito que reemplaza el formulario |
 | `web/src/app/api/registro/route.ts` | `POST` — valida (Zod), honeypot, rate limit, guarda en el `LeadStore` |
 | `web/src/app/api/admin/leads.csv/route.ts` | `GET` — exporta CSV (UTF-8 con BOM) protegido por `ADMIN_EXPORT_TOKEN` |
 | `web/src/lib/leads/` | `LeadStore` interface + implementations: `redis` (Upstash), `file` (local JSONL), `webhook` (Google Sheet / Make / Slack…), `memory` |
@@ -109,13 +109,13 @@ function doPost(e) {
   const l = body.lead, u = l.utm || {};
   SpreadsheetApp.getActiveSheet().appendRow([
     l.createdAt, l.businessName, l.contactName, l.phone, l.email || "", l.instagram || "",
-    l.barrio, l.businessType, u.source || "", u.medium || "", u.campaign || "", l.id,
+    l.businessType, u.source || "", u.medium || "", u.campaign || "", l.id,
   ]);
   return ContentService.createTextOutput("ok");
 }
 ```
 
-Lead record: `id`, `createdAt` (ISO), `businessName`, `contactName`, `phone` (E.164, e.g. `+59899123456`), `email?`, `instagram?` (handle without `@`), `barrio`, `businessType` (`café`), `utm?` (`source/medium/campaign`, captured from the landing URL).
+Lead record: `id`, `createdAt` (ISO), `businessName`, `contactName`, `phone` (E.164, e.g. `+59899123456`), `email?`, `instagram?` (handle without `@`), `businessType` (`café`), `utm?` (`source/medium/campaign`, captured from the landing URL).
 
 ### Env vars
 
@@ -155,7 +155,7 @@ The campaign is pre-launch, so the form had to read as *registering interest*. E
 | Button loading state | «Registrando…» | **«Anotando…»** | Follows the CTA |
 | Form support text | «Son dos datos. Después te escribimos nosotros.» | **«Son pocos datos. Todavía no lanzamos: anotate y te escribimos nosotros.»** | More than two fields; states pre-launch |
 | Success message | «…Alguien del equipo te va a escribir por WhatsApp para ponerte en marcha.» | «…Alguien del equipo te va a escribir por WhatsApp **para contarte cuándo arrancamos y** ponerte en marcha.» | Sets the expectation that launch comes first |
-| New field labels (not in v6) | — | «Tu nombre (obligatorio)», «Barrio de tu café (obligatorio)», «Email (opcional)», «Instagram de tu café (opcional)» + their errors | Fields requested for the lead campaign |
+| New field labels (not in v6) | — | «Tu nombre (obligatorio)», «Email (opcional)», «Instagram de tu café (opcional)» + their errors | Fields requested for the lead campaign |
 | Rate-limit error (not in v6) | — | «Hiciste demasiados envíos seguidos. Probá de nuevo en unos minutos.» | Anti-spam response |
 
 Kept unchanged on purpose: offer line («Registrate ahora y pagá 199 UYU…»), «Sumá tu café», «Qué pasa después», network error, header/WhatsApp copy, all sections and FAQ.

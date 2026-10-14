@@ -196,12 +196,6 @@ export const form = {
       help: "Te escribimos a este número por WhatsApp.",
       error: "Revisá el número. Tiene que ser un teléfono válido.",
     },
-    // NUEVO (no está en v6): campo pedido para la campaña de leads.
-    barrio: {
-      label: "Barrio de tu café (obligatorio)",
-      placeholder: "Ej.: Cordón",
-      error: "Escribí el barrio de tu café.",
-    },
     // NUEVO (no está en v6): campo opcional pedido para la campaña de leads.
     email: {
       label: "Email (opcional)",

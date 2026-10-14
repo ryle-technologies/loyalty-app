@@ -60,6 +60,6 @@ export async function POST(req: Request) {
     return json({ ok: false, error: form.networkError }, { status: 500 });
   }
 
-  console.info(`[registro] nuevo café: ${lead.businessName} (${lead.barrio})`);
+  console.info(`[registro] nuevo café: ${lead.businessName}`);
   return json({ ok: true }, { status: 201 });
 }
