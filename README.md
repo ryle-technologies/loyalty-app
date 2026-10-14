@@ -65,7 +65,8 @@ Visual design (identity still TBD, OQ-S13): warm «café» palette (paper, espre
 |---|---|
 | `web/src/config/site.ts` | **The only file to touch to publish**: `{{marca}}`, WhatsApp number, razón social, contact email, privacy/terms links. Each value can also come from a `NEXT_PUBLIC_*` env var |
 | `web/src/content/landing.ts` | All copy (v6) as constants. Every deviation from v6 is marked `// CAMBIO vs v6:` or `// NUEVO` |
-| `web/src/app/page.tsx` + `components/landing/*` | Sections 1–12 of copy v6: header, hero (with the **visible image placeholder** — animation to be designed later), «Del primer café al cliente de siempre», «Cómo funciona», «Más motivos para que te elijan», «Antes de que lo preguntes», precio, formulario, bloque WhatsApp, FAQ, CTA final, footer |
+| `web/src/app/page.tsx` + `components/landing/*` | Sections of copy v6: header, hero (with the **visible image placeholder** — animation to be designed later), «Del primer café al cliente de siempre», «Cómo funciona», «Más motivos para que te elijan», «Antes de que lo preguntes», precio, CTA «Sumá tu café» (lleva a `/registro`), bloque WhatsApp, FAQ, CTA final, footer |
+| `web/src/app/registro/page.tsx` | Página dedicada al registro de interés (solo el formulario + «Qué pasa después»). Todos los botones «Anotar mi café» apuntan acá |
 | `web/src/components/landing/registration-form.tsx` | «Registro de interés»: nombre del café, tu nombre, número (prefijo +598 editable, guardado en E.164), barrio, email (opcional), Instagram (opcional). Rubro oculto fijo `café`. Validación al salir del campo y al enviar, resumen de errores con foco, botón «Anotando…», error de red conservando datos, éxito que reemplaza el formulario |
 | `web/src/app/api/registro/route.ts` | `POST` — valida (Zod), honeypot, rate limit, guarda en el `LeadStore` |
 | `web/src/app/api/admin/leads.csv/route.ts` | `GET` — exporta CSV (UTF-8 con BOM) protegido por `ADMIN_EXPORT_TOKEN` |

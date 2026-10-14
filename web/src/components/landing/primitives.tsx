@@ -98,7 +98,7 @@ export function RegisterLink({
 }) {
   return (
     <Link
-      href="/#registro"
+      href="/registro"
       className={cn(
         buttonVariants({ variant: variant === "light" ? "default" : variant, size: "lg" }),
         ctaClass,
