@@ -1,4 +1,4 @@
-import { Check, MessageCircle, QrCode, Quote, Repeat, ScanLine, UserPlus, Wallet, X } from "lucide-react";
+import { Check, Gift, MessageCircle, QrCode, Quote, Repeat, UserPlus, Wallet, X } from "lucide-react";
 import { site } from "@/config/site";
 import {
   benefits,
@@ -76,7 +76,7 @@ export function Growth() {
 
 /* 4 · Cómo funciona */
 export function HowItWorks() {
-  const icons = [QrCode, Wallet, ScanLine];
+  const icons = [QrCode, Wallet, Gift];
   return (
     <Section id="como-funciona" tone="muted">
       <Reveal>

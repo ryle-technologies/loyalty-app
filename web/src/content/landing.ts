@@ -1,8 +1,9 @@
 /**
  * Copy de la landing de comercios — v6 (docs/copy/landing-copy.md), palabra por palabra.
  *
- * Única excepción: la campaña es PRE-lanzamiento (registro de interés), así que
- * el CTA del formulario y el mensaje de éxito se ajustaron mínimamente.
+ * Excepciones: la campaña es PRE-lanzamiento (registro de interés), así que
+ * el CTA del formulario y el mensaje de éxito se ajustaron mínimamente, y se
+ * reescribieron el hero, «Cómo te ayuda a crecer» y «Cómo funciona».
  * Cada desvío respecto de v6 está marcado con `// CAMBIO vs v6:` y listado en el README.
  */
 
@@ -20,14 +21,19 @@ export const cta = {
 
 export const offer = {
   main: "Registrate ahora y pagá 199 UYU por mes durante los primeros 6 meses.",
-  detail: "Después, 399 UYU por mes. IVA incluido. Sin permanencia.",
-  short: "IVA incluido. Sin permanencia.",
+  // CAMBIO vs v6: se sacó «IVA incluido».
+  detail: "Después, 399 UYU por mes. Sin permanencia.",
+  short: "Sin permanencia.",
 } as const;
 
 export const hero = {
-  title: "Sumá clientes nuevos. Hacé que los de siempre vuelvan.",
+  // CAMBIO vs v6: eyebrow sobre el título.
+  eyebrow: "Aumentá la lealtad y hacé que tus clientes vuelvan a comprarte.",
+  // CAMBIO vs v6: el título pasa de «Sumá clientes nuevos…» a la promesa de la próxima visita.
+  title: "Que tu cliente de hoy tenga otro motivo para volver mañana.",
+  // CAMBIO vs v6: la bajada ya no abre con el QR en caja.
   subtitle:
-    "Ponés un QR en caja y quien entra a tu café se lleva tu tarjeta de sellos en el celular, sin bajar ninguna app. Ve cuánto le falta y tiene un motivo para volver.",
+    "Convertí cada visita en la próxima. Tus clientes se llevan tu tarjeta de sellos en el celular después de haber comprado en tu café, sin bajar ninguna app, y siempre tienen un motivo para volver.",
   imagePlaceholder:
     "Imagen: tarjeta de sellos en el celular con animación (sellos que se van sumando) — a diseñar",
 } as const;
@@ -39,16 +45,19 @@ export const growth = {
       title: "Clientes nuevos",
       items: [
         {
-          lead: "Se suman el primer día.",
-          text: "Escanean el QR y ven tu recompensa antes de completar nada.",
+          // CAMBIO vs v6: el primer ítem de «Clientes nuevos» habla de la primera visita, no del QR.
+          lead: "Si alguien va a tu café por primera vez,",
+          text: "se llevarán una tarjeta con puntos o sellos.",
         },
         {
           lead: "Sin vueltas para empezar.",
-          text: "No bajan ninguna app: completan nombre, WhatsApp y email y guardan la tarjeta.",
+          // CAMBIO vs v6: aclara que la tarjeta queda en la billetera del celular.
+          text: "No bajan ninguna app: completan nombre, WhatsApp y email y guardan la tarjeta en su billetera del iPhone o Android.",
         },
         {
           lead: "Se van con tu café en el celular.",
-          text: "La tarjeta lleva el nombre de tu café, al lado de las otras tarjetas que usan.",
+          // CAMBIO vs v6: cierra con el motivo de tener el nombre del café a la vista.
+          text: "La tarjeta lleva el nombre de tu café, al lado de las otras tarjetas que usan, para que te recuerden siempre.",
         },
       ],
     },
@@ -57,15 +66,17 @@ export const growth = {
       items: [
         {
           lead: "Ven cuánto les falta.",
-          text: "El progreso está en la tarjeta, en su Wallet, y se actualiza solo con cada sello.",
+          // CAMBIO vs v6: el progreso queda en la billetera del celular y se actualiza solo.
+          text: "El progreso queda en la billetera del celular de tu cliente y se actualiza automáticamente.",
         },
         {
           lead: "Un empujón al final.",
           text: "Cuando les falta uno, la tarjeta les puede avisar que les falta 1 para la recompensa.",
         },
         {
-          lead: "Nunca empiezan de cero.",
-          text: "Si cambian de celular, recuperan la tarjeta con los mismos sellos.",
+          // CAMBIO vs v6: ya no habla de recuperar la tarjeta al cambiar de celular.
+          lead: "Los ayuda a pensar siempre en tu marca.",
+          text: "Y a volver a comprarte.",
         },
       ],
     },
@@ -74,18 +85,19 @@ export const growth = {
 
 export const howItWorks = {
   title: "Cómo funciona",
+  // CAMBIO vs v6: los tres pasos siguen la compra del cliente, no el alta del café.
   steps: [
     {
-      lead: "Elegís tu recompensa y ponés el QR en caja.",
-      text: "Entre 3 y 15 sellos y la recompensa que quieras. Te ayudamos a armarlo. Imprimís el QR y lo dejás a la vista, con la recompensa escrita al lado.",
+      lead: "Compra en tu café",
+      text: "Tu cliente pide lo de siempre y escanea el QR que tenés en la caja.",
     },
     {
-      lead: "Tu cliente lo escanea y guarda la tarjeta.",
-      text: "En Apple Wallet o Google Wallet. Ahí ve sus sellos.",
+      lead: "Se lleva tu tarjeta",
+      text: "Le queda en el celular, sin bajar ninguna app, y suma un sello con cada compra.",
     },
     {
-      lead: "Tu equipo suma con un toque.",
-      text: "Escanean la tarjeta desde el celular o la tablet del local y tocan «Sumar sello». Cuando el cliente completa la tarjeta, canjean la recompensa.",
+      lead: "Vuelve por su recompensa",
+      text: "Ve cuánto le falta y tiene un motivo para volver. La gente vuelve a donde la recompensan.",
     },
   ],
 } as const;
@@ -106,8 +118,9 @@ export const benefits = {
       text: "La tarjeta muestra la recompensa y el progreso cada vez que la abre.",
     },
     {
-      lead: "No frenás la fila.",
-      text: "Sumar es escanear y un toque. Canjear, dos. Si alguien toca dos veces sin querer, no se suman dos sellos.",
+      // CAMBIO vs v6: sellar es escanear el código del cliente, sin frenar la fila.
+      lead: "Sellar es así de fácil.",
+      text: "Escaneás el código de tu cliente y le sumás un sello, sin frenar la fila.",
     },
     {
       lead: "No comprás nada.",
@@ -151,19 +164,15 @@ export const pricing = {
     { label: "Primeros 6 meses", value: "199 UYU por mes", highlight: true },
     { label: "Desde el mes 7", value: "399 UYU por mes", highlight: false },
   ],
+  // CAMBIO vs v6: sin IVA ni transferencia. Quedan cancelación y actualización de la tarjeta.
   bullets: [
-    { lead: "IVA incluido.", text: "" },
     {
-      lead: "Sin permanencia.",
-      text: "Cancelás cuando quieras desde el panel. El servicio sigue hasta el final del mes que ya pagaste y no se cobra nada más.",
+      lead: "Cancelás cuando quieras desde el panel.",
+      text: "Seguís usándolo hasta el final del mes que pagaste.",
     },
     {
-      lead: "Pagás por transferencia bancaria",
-      text: "desde el primer mes. Los 6 meses con descuento corren desde que te registrás.",
-    },
-    {
-      lead: "Sin costos extra:",
-      text: "la tarjeta se actualiza sola en el Wallet de tus clientes.",
+      lead: "La tarjeta se actualiza sola en el Wallet de tus clientes,",
+      text: "sin costos extra.",
     },
   ],
   includesLead: "Incluye:",
@@ -255,8 +264,9 @@ export const faq = {
       a: "Por ahora no puede sumarse: no hay versión en papel ni otra opción. En Android tiene que tener una cuenta de Google iniciada.",
     },
     {
-      q: "¿Cuánto cuesta y cómo pago?",
-      a: "199 UYU por mes los primeros 6 meses desde que te registrás, después 399 UYU. IVA incluido. Se paga desde el primer mes, por transferencia bancaria.",
+      // CAMBIO vs v6: sin IVA ni forma de pago.
+      q: "¿Cuánto cuesta?",
+      a: "199 UYU por mes los primeros 6 meses desde que te registrás, después 399 UYU.",
     },
     {
       q: "¿Tengo que quedarme un tiempo mínimo?",
@@ -287,7 +297,8 @@ export const footer = {
   privacy: "Política de privacidad",
   terms: "Términos de la oferta",
   termsPending: "[PENDIENTE]",
-  prices: "Precios en pesos uruguayos, IVA incluido. Sin permanencia.",
+  // CAMBIO vs v6: se sacó «IVA incluido».
+  prices: "Precios en pesos uruguayos. Sin permanencia.",
   trademarks:
     "Apple Wallet es una marca de Apple Inc. Google Wallet es una marca de Google LLC.",
 } as const;

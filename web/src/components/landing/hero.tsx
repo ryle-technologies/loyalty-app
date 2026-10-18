@@ -18,6 +18,10 @@ export function Hero() {
 
       <Container className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         <div className="max-w-[40rem]">
+          <p className="mb-5 flex items-start gap-3 text-sm font-medium leading-snug text-terracotta sm:text-[15px]">
+            <span aria-hidden className="mt-[0.55em] h-px w-8 shrink-0 bg-terracotta" />
+            {hero.eyebrow}
+          </p>
           <h1 className="font-display font-display-hi text-balance text-[2.75rem] font-medium leading-[1.02] sm:text-6xl lg:text-[4.25rem]">
             {hero.title}
           </h1>

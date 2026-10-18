@@ -147,10 +147,24 @@ All optional for local dev; see `web/.env.example`.
 
 ### Copy changes vs. landing v6 (flagged)
 
-The campaign is pre-launch, so the form had to read as *registering interest*. Everything else is v6 word for word.
+The campaign is pre-launch, so the form had to read as *registering interest*. The hero, «Cómo te ayuda a crecer» and «Cómo funciona» were also rewritten. Everything else is v6 word for word.
 
 | Where | v6 | Landing | Why |
 |---|---|---|---|
+| Hero eyebrow | — | **«Aumentá la lealtad y hacé que tus clientes vuelvan a comprarte.»** | New line above the title |
+| Hero title | «Sumá clientes nuevos. Hacé que los de siempre vuelvan.» | **«Que tu cliente de hoy tenga otro motivo para volver mañana.»** | The next visit is the promise |
+| «Clientes nuevos», first item | «Se suman el primer día. Escanean el QR y ven tu recompensa antes de completar nada.» | **«Si alguien va a tu café por primera vez, se llevarán una tarjeta con puntos o sellos.»** | First visit, not the QR |
+| «Clientes nuevos», second item | «…y guardan la tarjeta.» | **«…y guardan la tarjeta en su billetera del iPhone o Android.»** | Names where the card is saved |
+| «Clientes nuevos», third item | «…al lado de las otras tarjetas que usan.» | **«…al lado de las otras tarjetas que usan, para que te recuerden siempre.»** | The café name is a reminder |
+| «Los de siempre», first item | «El progreso está en la tarjeta, en su Wallet, y se actualiza solo con cada sello.» | **«El progreso queda en la billetera del celular de tu cliente y se actualiza automáticamente.»** | Progress lives on the customer's phone |
+| «Los de siempre», third item | «Nunca empiezan de cero. Si cambian de celular, recuperan la tarjeta con los mismos sellos.» | **«Los ayuda a pensar siempre en tu marca. Y a volver a comprarte.»** | Brand recall and repeat purchase |
+| Cómo funciona, step 1 | «Elegís tu recompensa y ponés el QR en caja.» + setup copy | **«Compra en tu café. Tu cliente pide lo de siempre y escanea el QR que tenés en la caja.»** | The step starts at the purchase |
+| Cómo funciona, step 2 | «Tu cliente lo escanea y guarda la tarjeta. En Apple Wallet o Google Wallet. Ahí ve sus sellos.» | **«Se lleva tu tarjeta. Le queda en el celular, sin bajar ninguna app, y suma un sello con cada compra.»** | The card stays on the phone |
+| Cómo funciona, step 3 | «Tu equipo suma con un toque.» + scan/redeem copy | **«Vuelve por su recompensa. Ve cuánto le falta y tiene un motivo para volver. La gente vuelve a donde la recompensan.»** | The return is the outcome |
+| Beneficios, «No frenás la fila» | «Sumar es escanear y un toque. Canjear, dos. Si alguien toca dos veces sin querer, no se suman dos sellos.» | **«Sellar es así de fácil. Escaneás el código de tu cliente y le sumás un sello, sin frenar la fila.»** | Stamping is a scan, without slowing the line |
+| Precio, bullets | «IVA incluido», «Sin permanencia…», «Pagás por transferencia bancaria…», «Sin costos extra…» | **«Cancelás cuando quieras desde el panel. Seguís usándolo hasta el final del mes que pagaste.»** and **«La tarjeta se actualiza sola en el Wallet de tus clientes, sin costos extra.»** | No VAT line and no bank transfer |
+| Offer detail / short, footer, FAQ price | Mention «IVA incluido» and, in the FAQ, bank transfer | VAT and payment method removed. FAQ question is **«¿Cuánto cuesta?»** | Same removal outside the bullet list |
+| Hero subtitle | «Ponés un QR en caja y quien entra a tu café se lleva tu tarjeta de sellos en el celular, sin bajar ninguna app. Ve cuánto le falta y tiene un motivo para volver.» | **«Convertí cada visita en la próxima. Tus clientes se llevan tu tarjeta de sellos en el celular después de haber comprado en tu café, sin bajar ninguna app, y siempre tienen un motivo para volver.»** | The visit, not the QR, is the hook |
 | CTA button (hero, precio, formulario, CTA final) | «Registrar mi café» | **«Anotar mi café»** | «Registrar» reads as signing up for the live service |
 | Button loading state | «Registrando…» | **«Anotando…»** | Follows the CTA |
 | Form support text | «Son dos datos. Después te escribimos nosotros.» | **«Son pocos datos. Todavía no lanzamos: anotate y te escribimos nosotros.»** | More than two fields; states pre-launch |
@@ -158,7 +172,7 @@ The campaign is pre-launch, so the form had to read as *registering interest*. E
 | New field labels (not in v6) | — | «Tu nombre (obligatorio)», «Email (opcional)», «Instagram de tu café (opcional)» + their errors | Fields requested for the lead campaign |
 | Rate-limit error (not in v6) | — | «Hiciste demasiados envíos seguidos. Probá de nuevo en unos minutos.» | Anti-spam response |
 
-Kept unchanged on purpose: offer line («Registrate ahora y pagá 199 UYU…»), «Sumá tu café», «Qué pasa después», network error, header/WhatsApp copy, all sections and FAQ.
+Kept unchanged on purpose: offer line («Registrate ahora y pagá 199 UYU…»), «Sumá tu café», «Qué pasa después», network error, header/WhatsApp copy, the other benefit lines, objections and FAQ.
 
 ### What is needed to go live
 
